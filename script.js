@@ -4,7 +4,7 @@ var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie[0]);
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + pontos;
 // Declaração de upgrades
-var isUpgrade1On = false;
+var precoUpgrade1 = 50;
 var multiplicador1 = 0;
 var isUpgrade2On = false;
 var multiplicador2 = 0;
@@ -25,8 +25,11 @@ function pontuar(num) {
 function upgrade(num) {
     switch(num) {
         case 1:
-            isUpgrade1On = true;
-            multiplicador1++;
+            if(pontos >= precoUpgrade1) {
+                pontos-=precoUpgrade1;
+                precoUpgrade1 = precoUpgrade1*1.75;
+                multiplicador1++;
+            }
         case 2:
             isUpgrade2On = true;
             multiplicador2++;
