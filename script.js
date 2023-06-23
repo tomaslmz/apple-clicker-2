@@ -4,8 +4,8 @@ var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie[0]);
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + pontos;
 // Declaração de upgrades
-var isUPgrade1On = false;
-var multilpicador1 = 0;
+var isUpgrade1On = false;
+var multiplicador1 = 0;
 var isUpgrade2On = false;
 var multiplicador2 = 0;
 
