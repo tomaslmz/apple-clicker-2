@@ -1,23 +1,25 @@
+// Leitura de cookies
 let getCookie = document.cookie.split(";");
-// var pontos = typeof getCookie[0] != "undefined" && typeof parseInt(getCookie[0]) != "number" ? 0 : parseInt(getCookie[0]);
 var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie[0]);
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + pontos;
-var isUpgrade1On = false;
-var multiplicador1 = 0;
+// Declaração de upgrades
+var isUPgrade1On = false;
+var multilpicador1 = 0;
+var isUpgrade2On = false;
+var multiplicador2 = 0;
 
 function pontuar(num) {
-    
-    const qtd = document.getElementById("qtd");
-    qtd.innerHTML = "Maças: " + pontos;
     switch(num) {
         case 1:
-            pontos++;
+            pontos = pontos+1+(1*multiplicador1);
         break;
         case 2:
-            pontos = pontos * multiplicador1;
+            pontos = pontos * multiplicador2;
         break;
     }
+    const qtd = document.getElementById("qtd");
+    qtd.innerHTML = "Maças: " + pontos;
 }
 
 function upgrade(num) {
@@ -25,18 +27,25 @@ function upgrade(num) {
         case 1:
             isUpgrade1On = true;
             multiplicador1++;
+        case 2:
+            isUpgrade2On = true;
+            multiplicador2++;
         break;
-
     }
 }
 
 setInterval(() => {
-    if(isUpgrade1On) {
+    if(isUpgrade2On) {
         pontuar(2);
     }
 }, 5000);
 
 function salvar() {
-    let cookieString = pontos-1;
+    let cookieString = pontos;
     document.cookie = cookieString;
 }
+
+setInterval(() => {
+    let cookieString = pontos;
+    document.cookie = cookieString;
+}, 60000)
