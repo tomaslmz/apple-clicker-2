@@ -35,23 +35,39 @@ main {
     background-image: url('./images//madeira2.png');
 }
 
+#salvar {
+    display: inline;
+    padding: 5px;
+    width: 150px;
+    font-size: 1em;
+    height: 55px;
+    font-weight: bolder;
+    border-style: solid;
+    border-color: black;
+    border-width: 4px;
+    cursor: pointer;
+    background-image: url('./images//madeira2.png');
+}
+
 .menu {
     display: flex;
     background-image: url('./images/madeira.jpg');
     font-size: 2em;
     position: fixed;
+    flex-basis: 1000px;
     padding: 10px;
-    gap: 60vw;
+    gap: 20px;
     width: 100%;
     border-style: solid;
     border-color: black;
     border-width: 4px;
     align-self: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .menu > p {
-    flex-grow: 1;
+    margin-left: auto;
+    flex-grow: 0;
     display: inline-block;
     padding: 5px;
     font-weight: bolder;
