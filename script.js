@@ -1,4 +1,8 @@
-var pontos = 0;
+let getCookie = document.cookie.split(";");
+// var pontos = typeof getCookie[0] != "undefined" && typeof parseInt(getCookie[0]) != "number" ? 0 : parseInt(getCookie[0]);
+var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie[0]);
+const qtd = document.getElementById("qtd");
+qtd.innerHTML = "Maças: " + pontos;
 var isUpgrade1On = false;
 var multiplicador1 = 0;
 
@@ -31,3 +35,8 @@ setInterval(() => {
         pontuar(2);
     }
 }, 5000);
+
+function salvar() {
+    let cookieString = pontos-1;
+    document.cookie = cookieString;
+}
