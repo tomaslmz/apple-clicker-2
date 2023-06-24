@@ -66,10 +66,17 @@ main {
     flex-direction: row-reverse;
     justify-content: center;
     margin: auto;
-    background-color: white;
+    background-image: url('./images/madeira3.png');
+    background-size: cover;
     width: 300px;
     height: 200px;
     border-radius: 10px;
+}
+
+.msg > h3 {
+    display: block;
+    width: 100%;
+    background-color: #E0AC69;
 }
 
 
