@@ -3,6 +3,7 @@ let getCookie = document.cookie.split(";");
 var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie[0]);
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + parseInt(pontos);
+var hasMsg = false;
 // Declaração de upgrades
 var appleState = 0;
 var isUpgrade1On = false;
@@ -74,7 +75,7 @@ function upgrade(num) {
                 const qtd = document.getElementById("qtd");
                 qtd.innerHTML = "Maças: " + parseInt(pontos);
             } else {
-                document.getElementById("erro").style.display = "flex";
+                mostrarmsg(1);
             }
         break;
         case 2:
@@ -90,14 +91,20 @@ function upgrade(num) {
                     const qtd = document.getElementById("qtd");
                     qtd.innerHTML = "Maças: " + parseInt(pontos);
                 } else {
-                    document.getElementById("erro").style.display = "flex";
+                    mostrarmsg(1);
                 }
             } else {
-                // Mensagem de erro a fazer
+                mostrarmsg(2);
             }
         break;
     }
 }
+
+setInterval(() => {
+    if(hasMsg) {
+        document.getElementById("msg").style.display = "none";
+    }
+}, 10000);
 
 setInterval(() => {
     if(isUpgrade2On) {
@@ -110,11 +117,33 @@ function salvar() {
     document.cookie = cookieString;
 }
 
-function fecharTela() {
-    document.getElementById("erro").style.display = "none";
+function mostrarmsg(num) {
+    document.getElementById("msg").style.display = "inline-block";
+    document.getElementById("msg").style.color = '#EB0E0E';
+    hasMsg = true;
+    switch(num) {
+        case 1:
+            document.getElementById("msg").innerHTML = "Você não tem maçãs suficiente!";
+        break;
+        case 2:
+            document.getElementById("msg").innerHTML = "Este upgrade está bloqueado!";
+        break;
+    }
+}
+
+function mostrarMensagem(num) {
+    document.getElementById("msg").style.display = "inline-block";
+    document.getElementById("msg").style.color = 'black';
+    switch(num) {
+        case 1:
+            document.getElementById("msg").innerHTML = "O seu progresso foi salvo!";
+            hasMsg = true;
+        break;
+    }
 }
 
 setInterval(() => {
+    mostrarMensagem(1);
     let cookieString = pontos;
     document.cookie = cookieString;
 }, 60000)
