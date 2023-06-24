@@ -9,7 +9,8 @@ var isUpgrade1On = false;
 var precoUpgrade1 = 50;
 var multiplicador1 = 1;
 var isUpgrade2On = false;
-var multiplicador2 = 0;
+var precoUpgrade2 = 100;
+var multiplicador2 = 1;
 
 function pontuar(num) {
     switch(num) {
@@ -21,7 +22,7 @@ function pontuar(num) {
             }
         break;
         case 2:
-            pontos = pontos * multiplicador2;
+            pontos += 1 * multiplicador2;
         break;
     }
     evoluirMaca();
@@ -63,6 +64,9 @@ function upgrade(num) {
     switch(num) {
         case 1:
             if(pontos >= precoUpgrade1) {
+                if(!isUpgrade1On) {
+                    document.getElementById("up2").innerHTML = "Fazendeiros<br>100 <span class='vermelho'>maçãs</span>";
+                }
                 isUpgrade1On = true;
                 pontos-=precoUpgrade1;
                 precoUpgrade1 = precoUpgrade1*1.75;
@@ -74,8 +78,23 @@ function upgrade(num) {
             }
         break;
         case 2:
-            isUpgrade2On = true;
-            multiplicador2++;
+            if(!document.getElementById("up2").innerHTML == '???????') {
+                if(pontos >= precoUpgrade2) {
+                    if(!isUpgrade2On) {
+                        document.getElementById("up3").innerHTML = 'Mais maçãs por galho<br>150 <span class="vermelho">maçãs</span>';
+                    }
+                    isUpgrade2On = true;
+                    pontos-=precoUpgrade2;
+                    precoUpgrade2 = precoUpgrade2*1.75;
+                    multiplicador2+=0.5;
+                    const qtd = document.getElementById("qtd");
+                    qtd.innerHTML = "Maças: " + parseInt(pontos);
+                } else {
+                    document.getElementById("erro").style.display = "flex";
+                }
+            } else {
+                // Mensagem de erro a fazer
+            }
         break;
     }
 }
