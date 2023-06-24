@@ -13,20 +13,24 @@
             <button id="salvar" onclick="salvar()">Salvar</button>
             <p id="qtd">Maças: 0</p>
         </section>
-        <button class="erro">
+        <section class="erro" id="erro">
             <article class="msg">
+                <div id="fechar">
+                    <button class="btn-fechar" onclick="fecharTela()">X</button>
+                </div>
                 <h3>Você não possui maçãs suficiente!</h3>
             </article>
-        </button>
+            
+        </section>
         <section class="upgrades">
-            <button class="btn">Galhos</button>
+            <button class="btn" onclick="upgrade(1)">Galhos<br>50 <span class="vermelho">maçãs</span></button>
             <button class="btn">Upgrade 2</button>
             <button class="btn">Upgrade 3</button>
             <button class="btn">Upgrade 4</button>
             <button class="btn">Upgrade 5</button>
         </section>
         <section>
-            <button class="btn-apple" onclick="pontuar(1)"></button>
+            <button class="btn-apple" id="apple" onclick="pontuar(1)"></button>
         </section>
     </main>
     <script src="script.js"></script>
