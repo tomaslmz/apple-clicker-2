@@ -71,6 +71,7 @@ function upgrade(num) {
                 isUpgrade1On = true;
                 pontos-=precoUpgrade1;
                 precoUpgrade1 = precoUpgrade1*1.75;
+                document.getElementById("up1").innerHTML = 'Galhos<br>' + parseInt(precoUpgrade1) + ' <span class="vermelho">maçãs</span>'
                 multiplicador1+= 0.5;
                 const qtd = document.getElementById("qtd");
                 qtd.innerHTML = "Maças: " + parseInt(pontos);
@@ -87,6 +88,7 @@ function upgrade(num) {
                     isUpgrade2On = true;
                     pontos-=precoUpgrade2;
                     precoUpgrade2 = precoUpgrade2*1.75;
+                    document.getElementById("up2").innerHTML = "Fazendeiros<br>" + parseInt(precoUpgrade2) + " <span class='vermelho'>maçãs</span>";
                     multiplicador2+=0.5;
                     const qtd = document.getElementById("qtd");
                     qtd.innerHTML = "Maças: " + parseInt(pontos);
