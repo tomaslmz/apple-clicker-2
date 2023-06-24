@@ -84,7 +84,7 @@ main {
     border-color: black;
     border-width: 4px;
     cursor: pointer;
-    background-image: url('./images//madeira2.png');
+    background-image: url('./images//madeira3.png');
 }
 
 #salvar {
@@ -98,7 +98,7 @@ main {
     border-color: black;
     border-width: 4px;
     cursor: pointer;
-    background-image: url('./images//madeira2.png');
+    background-image: url('./images//madeira3.png');
 }
 
 .menu {
@@ -126,7 +126,7 @@ main {
     border-style: solid;
     border-color: black;
     border-width: 4px;
-    background-image: url('./images//madeira2.png');
+    background-image: url('./images//madeira3.png');
 }
 
 .upgrades {
@@ -157,8 +157,7 @@ main {
     border-color: black;
     border-width: 4px;
     box-shadow: inset 0px 0px 140px -93px rgba(0,0,0,0.75);
-    background-image: url('./images/madeira2.png');
-    background-size: cover;
+    background-image: url('./images/madeira3.png');
 }
 
 .btn-apple {
