@@ -29,6 +29,8 @@ function upgrade(num) {
                 pontos-=precoUpgrade1;
                 precoUpgrade1 = precoUpgrade1*1.75;
                 multiplicador1++;
+            } else {
+                document.getElementById("erro").style.display = "flex";
             }
         case 2:
             isUpgrade2On = true;
@@ -46,6 +48,10 @@ setInterval(() => {
 function salvar() {
     let cookieString = pontos;
     document.cookie = cookieString;
+}
+
+function fecharTela() {
+    document.getElementById("erro").style.display = "none";
 }
 
 setInterval(() => {
