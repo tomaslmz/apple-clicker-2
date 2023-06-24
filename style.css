@@ -129,6 +129,14 @@ main {
     background-image: url('./images//madeira3.png');
 }
 
+.branco {
+    color: white;
+}
+
+.vermelho {
+    color: red;
+}
+
 .upgrades {
     display: flex;
     justify-content: center;
