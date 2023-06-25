@@ -6,24 +6,29 @@ qtd.innerHTML = "Maças: " + parseInt(pontos);
 var hasMsg = false;
 // Declaração de upgrades
 var appleState = 0;
+// Upgrade 1
 var isUpgrade1On = false;
 var precoUpgrade1 = 50;
-var multiplicador1 = 1;
+var multiplicadorClique = 1;
+// Upgrade 2
 var isUpgrade2On = false;
 var precoUpgrade2 = 100;
-var multiplicador2 = 1;
+var multiplicadorAfk = 1;
+// Upgrade 3
+var isUpgrade3On = false;
+var precoUpgrade3 = 200;
 
 function pontuar(num) {
     switch(num) {
         case 1:
             if(isUpgrade1On) {
-                pontos += 1*multiplicador1;
+                pontos += 1*multiplicadorClique;
             } else {
                 pontos++;
             }
         break;
         case 2:
-            pontos += 1 * multiplicador2;
+            pontos += 1 * multiplicadorAfk;
         break;
     }
     evoluirMaca();
@@ -72,31 +77,51 @@ function upgrade(num) {
                 pontos-=precoUpgrade1;
                 precoUpgrade1 = precoUpgrade1*1.75;
                 document.getElementById("up1").innerHTML = 'Galhos<br>' + parseInt(precoUpgrade1) + ' <span class="vermelho">maçãs</span>'
-                multiplicador1+= 0.5;
+                multiplicadorClique+= 0.5;
                 const qtd = document.getElementById("qtd");
                 qtd.innerHTML = "Maças: " + parseInt(pontos);
             } else {
-                mostrarmsg(1);
+                mostrarErro(1);
             }
         break;
         case 2:
-            if(!document.getElementById("up2").innerHTML == '???????') {
+            if(isUpgrade1On) {
                 if(pontos >= precoUpgrade2) {
                     if(!isUpgrade2On) {
-                        document.getElementById("up3").innerHTML = 'Mais maçãs por galho<br>150 <span class="vermelho">maçãs</span>';
+                        document.getElementById("up3").innerHTML = 'Fertilização<br>' + precoUpgrade3 + ' <span class="vermelho">maçãs</span>';
                     }
                     isUpgrade2On = true;
                     pontos-=precoUpgrade2;
                     precoUpgrade2 = precoUpgrade2*1.75;
                     document.getElementById("up2").innerHTML = "Fazendeiros<br>" + parseInt(precoUpgrade2) + " <span class='vermelho'>maçãs</span>";
-                    multiplicador2+=0.5;
+                    multiplicadorAfk+=0.5;
                     const qtd = document.getElementById("qtd");
                     qtd.innerHTML = "Maças: " + parseInt(pontos);
                 } else {
-                    mostrarmsg(1);
+                    mostrarErro(1);
                 }
             } else {
-                mostrarmsg(2);
+                mostrarErro(2);
+            }
+        break;
+        case 3: 
+            if(isUpgrade3On) {
+                if(pontos >= precoUpgrade3) {
+                    if(!isUpgrade3On) {
+                        document.getElementById("up4").innerHTML = "Upgrade 5 ???";
+                    }
+                    isUpgrade3On = true;
+                    preco-=precoUpgrade3;
+                    precoUpgrade3 = precoUpgrade3*1.75;
+                    document.getElementById("up3").innerHTML = 'Fertilização<br>' + precoUpgrade3 + ' <span class="vermelho">maçãs</span>';
+                    multiplicadorClique+=1;
+                    const qtd = document.getElementById("qtd");
+                    qtd.innerHTML = "Maçãs: " + parseInt(pontos);
+                } else {
+                    mostrarErro(1);
+                }
+            } else {
+                mostrarErro(2);
             }
         break;
     }
@@ -119,7 +144,7 @@ function salvar() {
     document.cookie = cookieString;
 }
 
-function mostrarmsg(num) {
+function mostrarErro(num) {
     document.getElementById("msg").style.display = "inline-block";
     document.getElementById("msg").style.color = '#EB0E0E';
     hasMsg = true;
