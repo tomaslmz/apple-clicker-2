@@ -259,6 +259,7 @@ main {
         gap: 10px;
         width: 90vw;
         height: 60vw;
+        flex-direction: row;
         flex-wrap: wrap;
     }
 }
