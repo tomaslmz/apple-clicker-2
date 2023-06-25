@@ -2,7 +2,7 @@
 let getCookie = document.cookie.split(";");
 var pontos = localStorage.getItem('pontos') == null ? 0 : parseInt(localStorage.getItem('pontos'));
 const qtd = document.getElementById("qtd");
-qtd.innerHTML = "Maças: " + parseInt(pontos);
+qtd.innerHTML = "Maçãs: " + parseInt(pontos);
 var hasMsg = false;
 // Declaração de upgrades
 var appleState = localStorage.getItem('appleState') == null ? 0 : parseInt(localStorage.getItem('appleState'));
