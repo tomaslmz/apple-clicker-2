@@ -5,9 +5,9 @@ const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + parseInt(pontos);
 var hasMsg = false;
 // Declaração de upgrades
-var appleState = getCookie[1] == '' || typeof getCookie[1] == 'undefined' ? 0 : parseInt(getCookie);
-if(!getCookie[2] && !typeof getCookie[2] == 'undefined' == '') {
-    if(getCookie[2] == 'true') {
+var appleState = localStorage.getItem('appleState') == null ? 0 : parseInt(localStorage.getItem('appleState'));
+if(localStorage.getItem('hasEvolution') == null) {
+    if(localStorage.getItem('hasEvolution') == 'true') {
         var hasEvolution = true;
     } else {
         var hasEvolution = false;
@@ -16,8 +16,8 @@ if(!getCookie[2] && !typeof getCookie[2] == 'undefined' == '') {
     var hasEvolution = false;
 }
 // Upgrade 1
-if(!getCookie[3] == '' && !typeof getCookie[3] == 'undefined') {
-    if(getCookie[3] == 'true') {
+if(localStorage.getItem('isUpgrade1On')) {
+    if(localStorage.getItem('isUpgrade1On') == 'true') {
         var isUpgrade1On = true;
     } else {
         var isUpgrade1On = false;
@@ -28,11 +28,11 @@ if(!getCookie[3] == '' && !typeof getCookie[3] == 'undefined') {
 
 // let cookieString = pontos + ";" + appleState + ";" + hasEvolution + ";" + isUpgrade1On + ";" + precoUpgrade1 + ";" + multiplicadorClique + ";" + isUpgrade2On + ";" + precoUpgrade2 + ";" + multiplicadorAfk + ";" + isUpgrade3On + ";" + precoUpgrade3 + ";" + isUpgrade4On + ";" + precoUpgrade4 + ";" + isUpgrade5On + ";" + precoUpgrade5;
 
-var precoUpgrade1 = getCookie[4] == '' || typeof getCookie[4] == 'undefined' ? 50 : parseInt(getCookie[4]);
-var multiplicadorClique = getCookie[5] == '' || typeof getCookie[5] == 'undefined' ? 1 : parseInt(getCookie[5]);
+var precoUpgrade1 = localStorage.getItem('precoUpgrade1') == null ? 50 : parseInt(localStorage.getItem('precoUpgrade1'));
+var multiplicadorClique = localStorage.getItem('multiplicadorClique') == null ? 1 : parseInt(localStorage.getItem('multiplicadorClique'));
 // Upgrade 2
-if(!getCookie[6] == '' && !typeof getCookie[6] == 'undefined') {
-    if(getCookie[6] == 'true') {
+if(localStorage.getItem('isUpgrade2On')) {
+    if(localStorage.getItem('isUpgrade2On') == 'true') {
         var isUpgrade2On = true;
     } else {
         var isUpgrade2On = false;
@@ -40,11 +40,11 @@ if(!getCookie[6] == '' && !typeof getCookie[6] == 'undefined') {
 } else {
     var isUpgrade2On = false;
 }
-var precoUpgrade2 = getCookie[7] == '' || typeof getCookie[8] == 'undefined' ? 100 : parseInt(getCookie[7]);
-var multiplicadorAfk = getCookie[8] == '' || typeof getCookie[8] == 'undefined' ? 1 : parseInt(getCookie[8]);
+var precoUpgrade2 = localStorage.getItem('precoUpgrade2') == null ? 100 : parseInt(localStorage.getItem('precoUpgrade2'));
+var multiplicadorAfk = localStorage.getItem('multiplicadorAfk') == null ? 1 : parseInt(localStorage.getItem('multiplicadorAfk'));
 // Upgrade 3
-if(!getCookie[9] == '' && !typeof getCookie[9] == 'undefined') {
-    if(getCookie[9] == 'true') {
+if(localStorage.getItem('isUpgrade3On')) {
+    if(localStorage.getItem('isUpgrade3On') == 'true') {
         var isUpgrade3On = true;
     } else {
         var isUpgrade3On = false;
@@ -52,10 +52,10 @@ if(!getCookie[9] == '' && !typeof getCookie[9] == 'undefined') {
 } else {
     var isUpgrade3On = false;
 }
-var precoUpgrade3 = getCookie[10] == ''  || typeof getCookie[10] == 'undefined'? 200 : parseInt(getCookie[10]);
+var precoUpgrade3 = localStorage.getItem('precoUpgrade3') == null ? 200 : parseInt(localStorage.getItem('precoUpgrade3'));
 // Upgrade 4
-if(!getCookie[11] == '' && !typeof getCookie[11] == 'undefined') {
-    if(getCookie[11] == 'true') {
+if(localStorage.getItem('isUpgrade4On')) {
+    if(localStorage.getItem('isUpgrade4On') == 'true') {
         var isUpgrade4On = true;
     } else {
         var isUpgrade4On = false;
@@ -64,10 +64,10 @@ if(!getCookie[11] == '' && !typeof getCookie[11] == 'undefined') {
     var isUpgrade4On = false;
 }
 
-var precoUpgrade4 = getCookie[12] == '' || typeof getCookie[12] == 'undefined' ? 300 : parseInt(getCookie[12]);
+var precoUpgrade4 = localStorage.getItem('precoUpgrade4') == null ? 300 : parseInt(localStorage.getItem('precoUpgrade4'));
 // Upgrade 5
-if(!getCookie[13] == '' && !typeof getCookie[14] == 'undefined') {
-    if(getCookie[13] == 'true') {
+if(localStorage.getItem('isUpgrade5On')) {
+    if(localStorage.getItem('isUpgrade5On') == 'true') {
         var isUpgrade5On = true;
     } else {
         var isUpgrade5On = false;
@@ -76,8 +76,54 @@ if(!getCookie[13] == '' && !typeof getCookie[14] == 'undefined') {
     var isUpgrade5On = false;
 }
 
-var precoUpgrade5 = getCookie[14] == '' || typeof getCookie[14] == 'undefined' ? 1000 : parseInt(getCookie[14]);
+var precoUpgrade5 = localStorage.getItem('precoUpgrade5') == null ? 1000 : parseInt(localStorage.getItem('precoUpgrade5'));
 
+document.addEventListener("DOMContentLoaded", function() {
+    if(isUpgrade1On) {
+        document.getElementById("up2").innerHTML = "Fazendeiros<br>" + precoUpgrade2 + " <span class='vermelho'>maçãs</span>";
+    }
+
+    if(isUpgrade2On) {
+        document.getElementById("up3").innerHTML = 'Fertilização<br>' + parseInt(precoUpgrade3) + ' <span class="vermelho">maçãs</span>';
+    }
+
+    if(isUpgrade3On) {
+        document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4) + ' <span class="vermelho">maçãs</span>';
+    }
+
+    if(isUpgrade4On) {
+        document.getElementById("up5").innerHTML = "Evoluir<br>" + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
+    }
+
+    if(!hasEvolution) {
+        switch(appleState) {
+            case 1:
+                apple.style.backgroundImage = "url('./images/bigode.png')";
+            break;
+            case 2:
+                apple.style.backgroundImage = "url('./images/chapeu.png')"
+            break;
+            case 3:
+                apple.style.backgroundImage = "url('./images/oclinho.png')";
+            break;
+            case 4:
+                apple.style.backgroundImage = "url('./images/ternito.png')";
+            break;
+        }
+    } else {
+        switch(appleState) {
+            case 0:
+                apple.style.backgroundImage = "url('./images/secret2.png')";
+            break;
+            case 1:
+                apple.style.backgroundImage = "url('./images/secret3.png')"
+            break;
+            default:
+                apple.style.backgroundImage = 'url("./images/secret1.png")';
+            break;
+        }
+    }
+});
 
 function pontuar(num) {
     switch(num) {
@@ -264,8 +310,11 @@ function salvar() {
     localStorage.setItem('precoUpgrade2', precoUpgrade2);
     localStorage.setItem('multiplicadorAfk', multiplicadorAfk);
     localStorage.setItem('isUpgrade3On', isUpgrade3On);
-
-    
+    localStorage.setItem('precoUpgrade3', precoUpgrade3);
+    localStorage.setItem('isUpgrade4On', isUpgrade4On);
+    localStorage.setItem('precoUpgrade4', precoUpgrade4);
+    localStorage.setItem('isUpgrade5On', isUpgrade5On);
+    localStorage.setItem('precoUpgrade5', precoUpgrade5);
 }
 
 function mostrarErro(num) {
