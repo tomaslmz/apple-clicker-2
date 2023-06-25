@@ -165,6 +165,7 @@ main {
     background-image: url('./images/apple.png');
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
     width: 400px;
     height: 600px;
     align-self: center;
@@ -175,5 +176,6 @@ main {
 }
 
 .btn-apple:active {
+    transform: scale(2);
     transform: translateY(-5px);
 }

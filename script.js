@@ -6,6 +6,7 @@ qtd.innerHTML = "Maças: " + parseInt(pontos);
 var hasMsg = false;
 // Declaração de upgrades
 var appleState = 0;
+var hasEvolution = false;
 // Upgrade 1
 var isUpgrade1On = false;
 var precoUpgrade1 = 50;
@@ -20,6 +21,9 @@ var precoUpgrade3 = 200;
 // Upgrade 4
 var isUpgrade4On = false;
 var precoUpgrade4 = 300;
+// Upgrade 5
+var isUpgrade5On = false;
+var precoUpgrade5 = 1000;
 
 
 function pontuar(num) {
@@ -41,31 +45,48 @@ function pontuar(num) {
 
 function evoluirMaca() {
     const apple = document.getElementById("apple");
-    switch(appleState) {
-        case 0:
-            if(pontos >= 50) {
-                apple.style.backgroundImage = "url('./images/bigode.png')";
-                appleState++;
-            }
-        break;
-        case 1:
-            if(pontos >= 100) {
-                apple.style.backgroundImage = "url('./images/chapeu.png')"
-                appleState++;
-            }
-        break;
-        case 2:
-            if(pontos >= 200) {
-                apple.style.backgroundImage = "url('./images/oclinho.png')";
-                appleState++;
-            }
-        break;
-        case 3:
-            if(pontos >= 300) {
-                apple.style.backgroundImage = "url('./images/ternito.png')";
-                appleState++;
-            }
-        break;
+    if(!hasEvolution) {
+        switch(appleState) {
+            case 0:
+                if(pontos >= 50) {
+                    apple.style.backgroundImage = "url('./images/bigode.png')";
+                    appleState++;
+                }
+            break;
+            case 1:
+                if(pontos >= 100) {
+                    apple.style.backgroundImage = "url('./images/chapeu.png')"
+                    appleState++;
+                }
+            break;
+            case 2:
+                if(pontos >= 200) {
+                    apple.style.backgroundImage = "url('./images/oclinho.png')";
+                    appleState++;
+                }
+            break;
+            case 3:
+                if(pontos >= 300) {
+                    apple.style.backgroundImage = "url('./images/ternito.png')";
+                    appleState++;
+                }
+            break;
+        }
+    } else {
+        switch(appleState) {
+            case 0:
+                if(pontos >= 500) {
+                    apple.style.backgroundImage = "url('./images/secret2.png')";
+                    appleState++;
+                }
+            break;
+            case 1:
+                if(pontos >= 1000) {
+                    apple.style.backgroundImage = "url('./images/secret3.png')"
+                    appleState++;
+                }
+            break;
+        }
     }
 }
 
@@ -128,13 +149,30 @@ function upgrade(num) {
         case 4:
             if(isUpgrade3On) {
                 if(!isUpgrade4On) {
-                    document.getElementById("up5").inerHTML = "Upgrade 5 ????"
+                    document.getElementById("up5").innerHTML = "Evoluir<br>" + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
                 }
                 isUpgrade4On = true;
                 pontos-=precoUpgrade4;
-                precoUpgrade4 = precoUpgrade4*1.35
+                precoUpgrade4 = precoUpgrade4*1.35;
                 document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4)+ ' <span class="vermelho">maçãs</span>';
                 multiplicadorAfk+=1.75;
+                qtd.innerHTML = "Maçãs: " + parseInt(pontos);
+            } else {
+                mostrarErro(2);
+            }
+        break;
+        case 5:
+            if(isUpgrade4On) {
+                if(!isUpgrade5On) {
+                    document.getElementById("apple").style.backgroundImage = "url('./images/secret1.png')";
+                    appleState = 0;
+                    hasEvolution = true;
+                }
+                multiplicadorClique+=1.75;
+                multiplicadorAfk+=2;
+                pontos-=precoUpgrade5;
+                precoUpgrade5 = precoUpgrade5*1.35;
+                document.getElementById("up5").innerHTML = 'Evoluir<br>' + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
                 qtd.innerHTML = "Maçãs: " + parseInt(pontos);
             } else {
                 mostrarErro(2);
