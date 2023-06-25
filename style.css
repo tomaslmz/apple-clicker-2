@@ -51,15 +51,15 @@ main {
 
 #msg {
     display: none;
+    overflow-wrap: normal;
+    flex-wrap: wrap;
     padding: 5px;
     background-color: #E0AC69;
     font-size: 1em;
-    height: 55px;
     font-weight: bolder;
     border-style: solid;
     border-color: black;
     border-width: 4px;
-    cursor: pointer;
 }
 
 
