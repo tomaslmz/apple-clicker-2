@@ -219,6 +219,11 @@ main {
     transform: translateY(-5px);
 }
 
+.btn-apple:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 @media screen and (max-width: 892px) {
 
     .btn-apple {
