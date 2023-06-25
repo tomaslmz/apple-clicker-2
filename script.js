@@ -26,8 +26,6 @@ if(localStorage.getItem('isUpgrade1On')) {
     var isUpgrade1On = false;
 }
 
-// let cookieString = pontos + ";" + appleState + ";" + hasEvolution + ";" + isUpgrade1On + ";" + precoUpgrade1 + ";" + multiplicadorClique + ";" + isUpgrade2On + ";" + precoUpgrade2 + ";" + multiplicadorAfk + ";" + isUpgrade3On + ";" + precoUpgrade3 + ";" + isUpgrade4On + ";" + precoUpgrade4 + ";" + isUpgrade5On + ";" + precoUpgrade5;
-
 var precoUpgrade1 = localStorage.getItem('precoUpgrade1') == null ? 50 : parseInt(localStorage.getItem('precoUpgrade1'));
 var multiplicadorClique = localStorage.getItem('multiplicadorClique') == null ? 1 : parseInt(localStorage.getItem('multiplicadorClique'));
 // Upgrade 2
@@ -95,7 +93,21 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("up5").innerHTML = "Evoluir<br>" + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
     }
 
-    if(!hasEvolution) {
+    const apple = document.getElementById("apple");
+    if(isUpgrade5On) {
+        hasEvolution = true;
+        switch(appleState) {
+            case 0:
+                apple.style.backgroundImage = 'url("./images/secret1.png")';
+            break;
+            case 1:
+                apple.style.backgroundImage = "url('./images/secret2.png')";
+            break;
+            case 2:
+                apple.style.backgroundImage = "url('./images/secret3.png')"
+            break;
+        }
+    } else {
         switch(appleState) {
             case 1:
                 apple.style.backgroundImage = "url('./images/bigode.png')";
@@ -108,18 +120,6 @@ document.addEventListener("DOMContentLoaded", function() {
             break;
             case 4:
                 apple.style.backgroundImage = "url('./images/ternito.png')";
-            break;
-        }
-    } else {
-        switch(appleState) {
-            case 0:
-                apple.style.backgroundImage = "url('./images/secret2.png')";
-            break;
-            case 1:
-                apple.style.backgroundImage = "url('./images/secret3.png')"
-            break;
-            default:
-                apple.style.backgroundImage = 'url("./images/secret1.png")';
             break;
         }
     }
@@ -139,7 +139,7 @@ function pontuar(num) {
         break;
     }
     evoluirMaca();
-    qtd.innerHTML = "Maças: " + parseInt(pontos);
+    qtd.innerHTML = "Maçãs: " + parseInt(pontos);
 }
 
 function evoluirMaca() {
@@ -202,7 +202,7 @@ function upgrade(num) {
                 precoUpgrade1 = precoUpgrade1*1.35;
                 document.getElementById("up1").innerHTML = 'Galhos<br>' + parseInt(precoUpgrade1) + ' <span class="vermelho">maçãs</span>'
                 multiplicadorClique+= 0.5
-                qtd.innerHTML = "Maças: " + parseInt(pontos);
+                qtd.innerHTML = "Maçãs: " + parseInt(pontos);
             } else {
                 mostrarErro(1);
             }
@@ -218,7 +218,7 @@ function upgrade(num) {
                     precoUpgrade2 = precoUpgrade2*1.35;
                     document.getElementById("up2").innerHTML = "Fazendeiros<br>" + parseInt(precoUpgrade2) + " <span class='vermelho'>maçãs</span>";
                     multiplicadorAfk+=0.5;
-                    qtd.innerHTML = "Maças: " + parseInt(pontos);
+                    qtd.innerHTML = "Maçãs: " + parseInt(pontos);
                 } else {
                     mostrarErro(1);
                 }
@@ -262,17 +262,22 @@ function upgrade(num) {
         break;
         case 5:
             if(isUpgrade4On) {
-                if(!isUpgrade5On) {
-                    document.getElementById("apple").style.backgroundImage = "url('./images/secret1.png')";
-                    appleState = 0;
+                if(pontos>= precoUpgrade5) {
+                    if(!isUpgrade5On) {
+                        document.getElementById("apple").style.backgroundImage = "url('./images/secret1.png')";
+                        appleState = 0;
+                    }
+                    isUpgrade5On = true;
                     hasEvolution = true;
+                    multiplicadorClique+=1.75;
+                    multiplicadorAfk+=2;
+                    pontos-=precoUpgrade5;
+                    precoUpgrade5 = precoUpgrade5*1.35;
+                    document.getElementById("up5").innerHTML = 'Evoluir<br>' + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
+                    qtd.innerHTML = "Maçãs: " + parseInt(pontos);
+                } else {
+                    mostrarErro(1);
                 }
-                multiplicadorClique+=1.75;
-                multiplicadorAfk+=2;
-                pontos-=precoUpgrade5;
-                precoUpgrade5 = precoUpgrade5*1.35;
-                document.getElementById("up5").innerHTML = 'Evoluir<br>' + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
-                qtd.innerHTML = "Maçãs: " + parseInt(pontos);
             } else {
                 mostrarErro(2);
             }
@@ -294,12 +299,6 @@ setInterval(() => {
 
 function salvar() {
     mostrarMensagem(1);
-    // let cookieString = `${pontos};${appleState};${hasEvolution};${isUpgrade1On};${precoUpgrade1};${multiplicadorClique};${isUpgrade2On};${precoUpgrade2};${multiplicadorAfk};${isUpgrade3On};${precoUpgrade3};${isUpgrade4On};${precoUpgrade4};${isUpgrade5On};${precoUpgrade5}`
-    // var expirationDate = new Date();
-    // expirationDate.setDate(expirationDate.getDate() + 30);
-
-    // // Configurar o cookie com a string e a data de expiração
-    // document.cookie = cookieString + "; expires=" + expirationDate.toUTCString();
     localStorage.setItem('pontos', pontos);
     localStorage.setItem('appleState', appleState);
     localStorage.setItem('hasEvolution', hasEvolution);
