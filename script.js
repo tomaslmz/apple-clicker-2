@@ -1,29 +1,82 @@
 // Leitura de cookies
 let getCookie = document.cookie.split(";");
-var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie);
+var pontos = localStorage.getItem('pontos') == null ? 0 : parseInt(localStorage.getItem('pontos'));
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + parseInt(pontos);
 var hasMsg = false;
 // Declaração de upgrades
-var appleState = 0;
-var hasEvolution = false;
+var appleState = getCookie[1] == '' || typeof getCookie[1] == 'undefined' ? 0 : parseInt(getCookie);
+if(!getCookie[2] && !typeof getCookie[2] == 'undefined' == '') {
+    if(getCookie[2] == 'true') {
+        var hasEvolution = true;
+    } else {
+        var hasEvolution = false;
+    }
+} else {
+    var hasEvolution = false;
+}
 // Upgrade 1
-var isUpgrade1On = false;
-var precoUpgrade1 = 50;
-var multiplicadorClique = 1;
+if(!getCookie[3] == '' && !typeof getCookie[3] == 'undefined') {
+    if(getCookie[3] == 'true') {
+        var isUpgrade1On = true;
+    } else {
+        var isUpgrade1On = false;
+    }
+} else {
+    var isUpgrade1On = false;
+}
+
+// let cookieString = pontos + ";" + appleState + ";" + hasEvolution + ";" + isUpgrade1On + ";" + precoUpgrade1 + ";" + multiplicadorClique + ";" + isUpgrade2On + ";" + precoUpgrade2 + ";" + multiplicadorAfk + ";" + isUpgrade3On + ";" + precoUpgrade3 + ";" + isUpgrade4On + ";" + precoUpgrade4 + ";" + isUpgrade5On + ";" + precoUpgrade5;
+
+var precoUpgrade1 = getCookie[4] == '' || typeof getCookie[4] == 'undefined' ? 50 : parseInt(getCookie[4]);
+var multiplicadorClique = getCookie[5] == '' || typeof getCookie[5] == 'undefined' ? 1 : parseInt(getCookie[5]);
 // Upgrade 2
-var isUpgrade2On = false;
-var precoUpgrade2 = 100;
-var multiplicadorAfk = 1;
+if(!getCookie[6] == '' && !typeof getCookie[6] == 'undefined') {
+    if(getCookie[6] == 'true') {
+        var isUpgrade2On = true;
+    } else {
+        var isUpgrade2On = false;
+    }
+} else {
+    var isUpgrade2On = false;
+}
+var precoUpgrade2 = getCookie[7] == '' || typeof getCookie[8] == 'undefined' ? 100 : parseInt(getCookie[7]);
+var multiplicadorAfk = getCookie[8] == '' || typeof getCookie[8] == 'undefined' ? 1 : parseInt(getCookie[8]);
 // Upgrade 3
-var isUpgrade3On = false;
-var precoUpgrade3 = 200;
+if(!getCookie[9] == '' && !typeof getCookie[9] == 'undefined') {
+    if(getCookie[9] == 'true') {
+        var isUpgrade3On = true;
+    } else {
+        var isUpgrade3On = false;
+    }
+} else {
+    var isUpgrade3On = false;
+}
+var precoUpgrade3 = getCookie[10] == ''  || typeof getCookie[10] == 'undefined'? 200 : parseInt(getCookie[10]);
 // Upgrade 4
-var isUpgrade4On = false;
-var precoUpgrade4 = 300;
+if(!getCookie[11] == '' && !typeof getCookie[11] == 'undefined') {
+    if(getCookie[11] == 'true') {
+        var isUpgrade4On = true;
+    } else {
+        var isUpgrade4On = false;
+    }
+} else {
+    var isUpgrade4On = false;
+}
+
+var precoUpgrade4 = getCookie[12] == '' || typeof getCookie[12] == 'undefined' ? 300 : parseInt(getCookie[12]);
 // Upgrade 5
-var isUpgrade5On = false;
-var precoUpgrade5 = 1000;
+if(!getCookie[13] == '' && !typeof getCookie[14] == 'undefined') {
+    if(getCookie[13] == 'true') {
+        var isUpgrade5On = true;
+    } else {
+        var isUpgrade5On = false;
+    }
+} else {
+    var isUpgrade5On = false;
+}
+
+var precoUpgrade5 = getCookie[14] == '' || typeof getCookie[14] == 'undefined' ? 1000 : parseInt(getCookie[14]);
 
 
 function pontuar(num) {
@@ -195,8 +248,24 @@ setInterval(() => {
 
 function salvar() {
     mostrarMensagem(1);
-    let cookieString = pontos;
-    document.cookie = cookieString;
+    // let cookieString = `${pontos};${appleState};${hasEvolution};${isUpgrade1On};${precoUpgrade1};${multiplicadorClique};${isUpgrade2On};${precoUpgrade2};${multiplicadorAfk};${isUpgrade3On};${precoUpgrade3};${isUpgrade4On};${precoUpgrade4};${isUpgrade5On};${precoUpgrade5}`
+    // var expirationDate = new Date();
+    // expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // // Configurar o cookie com a string e a data de expiração
+    // document.cookie = cookieString + "; expires=" + expirationDate.toUTCString();
+    localStorage.setItem('pontos', pontos);
+    localStorage.setItem('appleState', appleState);
+    localStorage.setItem('hasEvolution', hasEvolution);
+    localStorage.setItem('isUpgrade1On', isUpgrade1On);
+    localStorage.setItem('precoUpgrade1', precoUpgrade1);
+    localStorage.setItem('multiplicadorClique', multiplicadorClique);
+    localStorage.setItem('isUpgrade2On', isUpgrade2On);
+    localStorage.setItem('precoUpgrade2', precoUpgrade2);
+    localStorage.setItem('multiplicadorAfk', multiplicadorAfk);
+    localStorage.setItem('isUpgrade3On', isUpgrade3On);
+
+    
 }
 
 function mostrarErro(num) {
@@ -225,7 +294,5 @@ function mostrarMensagem(num) {
 }
 
 setInterval(() => {
-    mostrarMensagem(1);
-    let cookieString = pontos;
-    document.cookie = cookieString;
+    salvar();
 }, 60000)

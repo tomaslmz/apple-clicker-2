@@ -23,10 +23,6 @@ main {
     align-items: center;
 }
 
-#fechar {
-    align-self: flex-start;
-}
-
 .btn-fechar {
     margin-top: 5px;
     margin-right: 5px;
@@ -90,6 +86,42 @@ main {
     border-width: 4px;
     cursor: pointer;
     background-color: #E0AC69;
+}
+
+#menu:hover {
+    background-color: #dfb988;
+}
+
+#salvar:hover {
+    background-color: #dfb988;
+}
+
+.menuopen {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.418);
+    justify-content: center;
+    align-items: center;
+}
+
+.menuopen2 {
+    width: 40vw;
+    min-width: 200px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    background-image: url('./images/madeira.jpg');
+    background-color: #774232;
+    background-size: auto;
+    border-style: solid;
+    border-color: #a46335;
+    border-width: 8px;
+    box-shadow: inset -2px -1px 115px 6px rgba(0,0,0,0.75);
 }
 
 .menu {
@@ -161,6 +193,10 @@ main {
     background-color: #E0AC69;
 }
 
+.btn:hover {
+    background-color: #dfb988;
+}
+
 .btn-apple {
     background-image: url('./images/apple.png');
     background-repeat: no-repeat;
@@ -176,6 +212,5 @@ main {
 }
 
 .btn-apple:active {
-    transform: scale(2);
     transform: translateY(-5px);
 }
