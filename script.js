@@ -1,6 +1,6 @@
 // Leitura de cookies
 let getCookie = document.cookie.split(";");
-var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie[0]);
+var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie);
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + parseInt(pontos);
 var hasMsg = false;
@@ -17,6 +17,10 @@ var multiplicadorAfk = 1;
 // Upgrade 3
 var isUpgrade3On = false;
 var precoUpgrade3 = 200;
+// Upgrade 4
+var isUpgrade4On = false;
+var precoUpgrade4 = 300;
+
 
 function pontuar(num) {
     switch(num) {
@@ -32,7 +36,6 @@ function pontuar(num) {
         break;
     }
     evoluirMaca();
-    const qtd = document.getElementById("qtd");
     qtd.innerHTML = "Maças: " + parseInt(pontos);
 }
 
@@ -67,6 +70,7 @@ function evoluirMaca() {
 }
 
 function upgrade(num) {
+    const qtd = document.getElementById("qtd");
     switch(num) {
         case 1:
             if(pontos >= precoUpgrade1) {
@@ -75,10 +79,9 @@ function upgrade(num) {
                 }
                 isUpgrade1On = true;
                 pontos-=precoUpgrade1;
-                precoUpgrade1 = precoUpgrade1*1.75;
+                precoUpgrade1 = precoUpgrade1*1.35;
                 document.getElementById("up1").innerHTML = 'Galhos<br>' + parseInt(precoUpgrade1) + ' <span class="vermelho">maçãs</span>'
-                multiplicadorClique+= 0.5;
-                const qtd = document.getElementById("qtd");
+                multiplicadorClique+= 0.5
                 qtd.innerHTML = "Maças: " + parseInt(pontos);
             } else {
                 mostrarErro(1);
@@ -88,14 +91,13 @@ function upgrade(num) {
             if(isUpgrade1On) {
                 if(pontos >= precoUpgrade2) {
                     if(!isUpgrade2On) {
-                        document.getElementById("up3").innerHTML = 'Fertilização<br>' + precoUpgrade3 + ' <span class="vermelho">maçãs</span>';
+                        document.getElementById("up3").innerHTML = 'Fertilização<br>' + parseInt(precoUpgrade3) + ' <span class="vermelho">maçãs</span>';
                     }
                     isUpgrade2On = true;
                     pontos-=precoUpgrade2;
-                    precoUpgrade2 = precoUpgrade2*1.75;
+                    precoUpgrade2 = precoUpgrade2*1.35;
                     document.getElementById("up2").innerHTML = "Fazendeiros<br>" + parseInt(precoUpgrade2) + " <span class='vermelho'>maçãs</span>";
                     multiplicadorAfk+=0.5;
-                    const qtd = document.getElementById("qtd");
                     qtd.innerHTML = "Maças: " + parseInt(pontos);
                 } else {
                     mostrarErro(1);
@@ -105,21 +107,35 @@ function upgrade(num) {
             }
         break;
         case 3: 
-            if(isUpgrade3On) {
+            if(isUpgrade2On) {
                 if(pontos >= precoUpgrade3) {
                     if(!isUpgrade3On) {
-                        document.getElementById("up4").innerHTML = "Upgrade 5 ???";
+                        document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4) + ' <span class="vermelho">maçãs</span>';
                     }
                     isUpgrade3On = true;
-                    preco-=precoUpgrade3;
-                    precoUpgrade3 = precoUpgrade3*1.75;
-                    document.getElementById("up3").innerHTML = 'Fertilização<br>' + precoUpgrade3 + ' <span class="vermelho">maçãs</span>';
+                    pontos-=precoUpgrade3;
+                    precoUpgrade3 = precoUpgrade3*1.35;
+                    document.getElementById("up3").innerHTML = 'Fertilização<br>' + parseInt(precoUpgrade3) + ' <span class="vermelho">maçãs</span>';
                     multiplicadorClique+=1;
-                    const qtd = document.getElementById("qtd");
                     qtd.innerHTML = "Maçãs: " + parseInt(pontos);
                 } else {
                     mostrarErro(1);
                 }
+            } else {
+                mostrarErro(2);
+            }
+        break;
+        case 4:
+            if(isUpgrade3On) {
+                if(!isUpgrade4On) {
+                    document.getElementById("up5").inerHTML = "Upgrade 5 ????"
+                }
+                isUpgrade4On = true;
+                pontos-=precoUpgrade4;
+                precoUpgrade4 = precoUpgrade4*1.35
+                document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4)+ ' <span class="vermelho">maçãs</span>';
+                multiplicadorAfk+=1.75;
+                qtd.innerHTML = "Maçãs: " + parseInt(pontos);
             } else {
                 mostrarErro(2);
             }
@@ -140,6 +156,7 @@ setInterval(() => {
 }, 5000);
 
 function salvar() {
+    mostrarMensagem(1);
     let cookieString = pontos;
     document.cookie = cookieString;
 }
