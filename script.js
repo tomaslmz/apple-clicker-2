@@ -1,6 +1,6 @@
 // Leitura de cookies
 let getCookie = document.cookie.split(";");
-var pontos = getCookie[0] == '' ? 0 : parseInt(getCookie);
+var pontos = localStorage.getItem('pontos') == null ? 0 : parseInt(localStorage.getItem('pontos'));
 const qtd = document.getElementById("qtd");
 qtd.innerHTML = "Maças: " + parseInt(pontos);
 var hasMsg = false;
@@ -248,8 +248,24 @@ setInterval(() => {
 
 function salvar() {
     mostrarMensagem(1);
-    let cookieString = pontos + ";" + appleState + ";" + hasEvolution + ";" + isUpgrade1On + ";" + precoUpgrade1 + ";" + multiplicadorClique + ";" + isUpgrade2On + ";" + precoUpgrade2 + ";" + multiplicadorAfk + ";" + isUpgrade3On + ";" + precoUpgrade3 + ";" + isUpgrade4On + ";" + precoUpgrade4 + ";" + isUpgrade5On + ";" + precoUpgrade5;
-    document.cookie = cookieString;
+    // let cookieString = `${pontos};${appleState};${hasEvolution};${isUpgrade1On};${precoUpgrade1};${multiplicadorClique};${isUpgrade2On};${precoUpgrade2};${multiplicadorAfk};${isUpgrade3On};${precoUpgrade3};${isUpgrade4On};${precoUpgrade4};${isUpgrade5On};${precoUpgrade5}`
+    // var expirationDate = new Date();
+    // expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // // Configurar o cookie com a string e a data de expiração
+    // document.cookie = cookieString + "; expires=" + expirationDate.toUTCString();
+    localStorage.setItem('pontos', pontos);
+    localStorage.setItem('appleState', appleState);
+    localStorage.setItem('hasEvolution', hasEvolution);
+    localStorage.setItem('isUpgrade1On', isUpgrade1On);
+    localStorage.setItem('precoUpgrade1', precoUpgrade1);
+    localStorage.setItem('multiplicadorClique', multiplicadorClique);
+    localStorage.setItem('isUpgrade2On', isUpgrade2On);
+    localStorage.setItem('precoUpgrade2', precoUpgrade2);
+    localStorage.setItem('multiplicadorAfk', multiplicadorAfk);
+    localStorage.setItem('isUpgrade3On', isUpgrade3On);
+
+    
 }
 
 function mostrarErro(num) {
