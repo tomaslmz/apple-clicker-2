@@ -250,8 +250,15 @@ main {
         gap: 0px;
     }
 
+    .btn {
+        width: 100px;
+        height: 50px;
+    }
+
     .upgrades {
+        gap: 10px;
         width: 90vw;
-        height: 400px;
+        height: 60vw;
+        flex-wrap: wrap;
     }
 }
