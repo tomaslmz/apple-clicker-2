@@ -247,15 +247,17 @@ function upgrade(num) {
         break;
         case 4:
             if(isUpgrade3On) {
-                if(!isUpgrade4On) {
-                    document.getElementById("up5").innerHTML = "Evoluir<br>" + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
+                if(pontos >= precoUpgrade4) {
+                    if(!isUpgrade4On) {
+                        document.getElementById("up5").innerHTML = "Evoluir<br>" + parseInt(precoUpgrade5) + ' <span class="vermelho">maçãs</span>';
+                    }
+                    isUpgrade4On = true;
+                    pontos-=precoUpgrade4;
+                    precoUpgrade4 = precoUpgrade4*1.35;
+                    document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4)+ ' <span class="vermelho">maçãs</span>';
+                    multiplicadorAfk+=1.75;
+                    qtd.innerHTML = "Maçãs: " + parseInt(pontos);
                 }
-                isUpgrade4On = true;
-                pontos-=precoUpgrade4;
-                precoUpgrade4 = precoUpgrade4*1.35;
-                document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4)+ ' <span class="vermelho">maçãs</span>';
-                multiplicadorAfk+=1.75;
-                qtd.innerHTML = "Maçãs: " + parseInt(pontos);
             } else {
                 mostrarErro(2);
             }
