@@ -77,6 +77,8 @@ if(localStorage.getItem('isUpgrade5On')) {
 var precoUpgrade5 = localStorage.getItem('precoUpgrade5') == null ? 1000 : parseInt(localStorage.getItem('precoUpgrade5'));
 
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("up1").innerHTML = "Galhos<br>" + precoUpgrade1 + " <span class='vermelho'>maçãs</span>";
+
     if(isUpgrade1On) {
         document.getElementById("up2").innerHTML = "Fazendeiros<br>" + precoUpgrade2 + " <span class='vermelho'>maçãs</span>";
     }
