@@ -257,6 +257,8 @@ function upgrade(num) {
                     document.getElementById("up4").innerHTML = 'Mais fazendeiros<br>' + parseInt(precoUpgrade4)+ ' <span class="vermelho">maçãs</span>';
                     multiplicadorAfk+=1.75;
                     qtd.innerHTML = "Maçãs: " + parseInt(pontos);
+                } else {
+                    mostrarErro(1);
                 }
             } else {
                 mostrarErro(2);
