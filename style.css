@@ -159,7 +159,7 @@ main {
 }
 
 .vermelho {
-    color: red;
+    color: rgb(133, 2, 2);
 }
 
 .upgrades {
@@ -226,6 +226,10 @@ main {
 
 @media screen and (max-width: 892px) {
 
+    body {
+        background-image: url('./images/background-phone.png');
+    }
+    
     .btn-apple {
         margin-top: 50px;
         width: 250px;
